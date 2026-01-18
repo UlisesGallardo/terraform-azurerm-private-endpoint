@@ -11,7 +11,7 @@ resource "azurerm_private_endpoint" "this" {
   dynamic "private_service_connection" {
     for_each = each.value.private_service_connection != null ? [each.value.private_service_connection] : []
     content {
-      name                              = private_service_connection.value.name == null ? "pvsvccon-${each.value.private_endpoint_name}" : null
+      name                              = private_service_connection.value.name == null ? "pvsvccon-${each.value.private_endpoint_name}" : private_service_connection.value.name
       is_manual_connection              = private_service_connection.value.is_manual_connection
       private_connection_resource_id    = private_service_connection.value.private_connection_resource_id
       private_connection_resource_alias = private_service_connection.value.private_connection_resource_alias
